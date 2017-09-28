@@ -3,7 +3,7 @@
     'name': "pinup_price_sale",
 
     'description': """
-        pin up price in the purchase order
+        pin up price in the sale order
     """,
 
     'author': "Yecora",

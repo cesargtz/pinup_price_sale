@@ -154,8 +154,7 @@ class pinup_price_purchase(models.Model):
             'product_id': product[0].id,
             'quantity' : self.pinup_tons,
             'uom_id' : 7,
-            # 'account_id': self.env['account.account'].search([('code','=','111211')]).id,
-            'account_id':6,
+            'account_id': self.env['account.account'].search([('code','=','111211')]).id,
             'name':'venta',
             'company_id':1,
         })
