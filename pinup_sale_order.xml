@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="sale_order_pinup_contract">
+            <field name="name">sale.order.pinup.contract</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <button name="action_cancel" position="before">
+                    <button type="object" class="oe_highlight"
+                        name="pinup_price" string="Set Price" attrs="{'invisible': [('invoice_status', '!=', 'to invoice')]}"/>
+                </button>
+            </field>
+        </record>
+    </data>
+</openerp>
