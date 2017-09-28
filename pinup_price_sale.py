@@ -145,8 +145,8 @@ class pinup_price_purchase(models.Model):
     @api.multi
     def create_move_id(self, invoice_id):
         product = self.sale_order_id.order_line.product_id
-        iva = product.product_tmpl_id.supplier_taxes_id.id
-        _logger.critical(product.product_tmpl_id.supplier_taxes_id.id )
+        # iva = product.product_tmpl_id.supplier_taxes_id.id
+        # _logger.critical(product.product_tmpl_id.supplier_taxes_id.id )
         move_id = self.env['account.invoice.line'].create({
             'invoice_id': invoice_id.id,
             'origin': self.sale_order_id.name,
@@ -155,7 +155,7 @@ class pinup_price_purchase(models.Model):
             'quantity' : self.pinup_tons,
             'uom_id' : 7,
             'account_id': self.env['account.account'].search([('code','=','111211')]).id,
-            'name':'venta',
+            'name':product[0].product_tmpl_id.description_sale,
             'company_id':1,
         })
 
