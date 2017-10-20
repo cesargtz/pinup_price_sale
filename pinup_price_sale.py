@@ -154,7 +154,7 @@ class pinup_price_purchase(models.Model):
         self.create_move_id(invoice_id)
         self.invoice_create_id = invoice_id
         if self.service > 0:
-            self.create_service(1)
+            self.create_service()
         self.state = 'close'
 
 
@@ -175,34 +175,34 @@ class pinup_price_purchase(models.Model):
             'company_id':1,
         })
 
-        @api.multi
-        def create_service(self, x):
-            invoice_id = self.env['account.invoice'].create({
-                'partner_id' : self.partner_id.id,
-                'account_id' : self.partner_id.property_account_receivable_id.id,
-                'journal_id' : self.env['account.journal'].search([('type','=','sale')], order='id', limit=1).id,
-                'currency_id' : 34,
-                'type':'out_invoice',
-                'origin' : self.sale_order_id.name,
-                'date_invoice':self.request_date,
-                'state':'draft',
-                })
-            self.service_move_id(invoice_id)
-            self.invoice_service_id= invoice_id
-
-
-        @api.multi
-        def service_move_id(self, invoice_id):
-            move_id = self.env['account.invoice.line'].create({
-                'invoice_id': invoice_id.id,
-                'origin': self.sale_order_id.name,
-                'price_unit': self.price_mxn,
-                'product_id': 202,
-                'quantity' : self.pinup_tons,
-                'uom_id' : 7,
-                'account_id': self.env['account.account'].search([('code','=','182122')]).id,
-                'name':'SERVICIO DE ELEVACIÓN',
-                'company_id':1,
+    @api.multi
+    def create_service(self, x):
+        invoice_id = self.env['account.invoice'].create({
+            'partner_id' : self.partner_id.id,
+            'account_id' : self.partner_id.property_account_receivable_id.id,
+            'journal_id' : self.env['account.journal'].search([('type','=','sale')], order='id', limit=1).id,
+            'currency_id' : 34,
+            'type':'out_invoice',
+            'origin' : self.sale_order_id.name,
+            'date_invoice':self.request_date,
+            'state':'draft',
             })
+        self.service_move_id(invoice_id)
+        self.invoice_service_id= invoice_id
+
+
+    @api.multi
+    def service_move_id(self, invoice_id):
+        move_id = self.env['account.invoice.line'].create({
+            'invoice_id': invoice_id.id,
+            'origin': self.sale_order_id.name,
+            'price_unit': self.service,
+            'product_id': 202,
+            'quantity' : self.pinup_tons,
+            'uom_id' : 7,
+            'account_id': self.env['account.account'].search([('code','=','182122')]).id,
+            'name':'SERVICIO DE ELEVACIÓN',
+            'company_id':1,
+        })
 
         # self.env.cr.execute('INSERT INTO account_invoice_line_tax VALUES (%s, %s)',(move_id.id, iva))
