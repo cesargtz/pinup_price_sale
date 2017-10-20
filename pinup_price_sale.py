@@ -154,7 +154,7 @@ class pinup_price_purchase(models.Model):
         self.create_move_id(invoice_id)
         self.invoice_create_id = invoice_id
         if self.service > 0:
-            self.create_service()
+            self.create_service(context)
         self.state = 'close'
 
 
@@ -193,7 +193,6 @@ class pinup_price_purchase(models.Model):
 
         @api.multi
         def service_move_id(self, invoice_id):
-            product = self.sale_order_id.order_line.product_id
             move_id = self.env['account.invoice.line'].create({
                 'invoice_id': invoice_id.id,
                 'origin': self.sale_order_id.name,
