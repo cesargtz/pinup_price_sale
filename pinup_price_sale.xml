@@ -90,6 +90,7 @@
                             <group>
                               <field name="price_mxn" readonly="1"/>
                               <field name="invoice_create_id" states="close" readonly="1"/>
+                              <field name="invoice_service_id" states="close" readonly="1"/>
                             </group>
                         </group>
                     </sheet>

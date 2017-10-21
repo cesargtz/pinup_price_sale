@@ -170,13 +170,13 @@ class pinup_price_purchase(models.Model):
             'product_id': product[0].id,
             'quantity' : self.pinup_tons,
             'uom_id' : 7,
-            'account_id': self.env['account.account'].search([('code','=','111211')]).id,
+            'account_id': self.env['account.account'].search([('code','=','141122')]).id,
             'name':product[0].product_tmpl_id.description_sale,
             'company_id':1,
         })
 
     @api.multi
-    def create_service(self, x):
+    def create_service(self):
         invoice_id = self.env['account.invoice'].create({
             'partner_id' : self.partner_id.id,
             'account_id' : self.partner_id.property_account_receivable_id.id,
