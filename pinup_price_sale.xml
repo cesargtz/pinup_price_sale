@@ -24,7 +24,8 @@
                         <button name="action_confirmed" type="object" string="Price" states="draft"/>
                         <button name="action_create" type="object" string="Create Inovice"
                              states="invoiced" class="oe_highlight"/>
-                        <field name="state" widget="statusbar" readonly="1"/>
+                        <button name="button_cancel" type="object" string="Cancelar" states="close" class="oe_highlight"  groups="pinup_price_purchase.price_purchase_cancel"/>
+                        <field name="state" widget="statusbar" readonly="1" clickable="1" statusbar_visible="draft,price,currency,invoiced,close"/>
                     </header>
                     <sheet>
                         <div class="oe_title">
@@ -109,9 +110,13 @@
             <field name="arch" type="xml">
                 <tree string="pinup_price_sale Tree" default_order="name desc">
                     <field name="name"/>
-                    <field name="sale_order_id"/>
                     <field name="request_date"/>
-                    <field name="pinup_tons"/>
+                    <field name="partner_id"/>
+                    <field name="sale_order_id"/>
+                    <field name="bases_ton"/>
+                    <field name="service"/>
+                    <field name="pinup_tons" sum="Tons"/>
+                    <field name="state"/>
                 </tree>
             </field>
         </record>

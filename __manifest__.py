@@ -15,7 +15,7 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base','sale','truck_outlet'],
+    'depends': ['base','sale','truck_outlet','pinup_price_purchase'],
 
     # always loaded
     'data': [

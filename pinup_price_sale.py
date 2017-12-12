@@ -22,6 +22,7 @@ class pinup_price_purchase(models.Model):
     price_min = fields.Float(digits=(12, 2))
     service = fields.Float(digits=(12, 4))
     tc = fields.Float(digits=(12, 4))
+    active = fields.Boolean(default=True)
     price_per_ton = fields.Float(compute="_compute_ton_usd", store=True, digits=(12, 2))
     price_mxn = fields.Float(compute="_compute_mx", store=True, digits=(12, 2))
     tons_outlet = fields.Float(
@@ -50,9 +51,14 @@ class pinup_price_purchase(models.Model):
         ('currency', "Currency"),
         ('invoiced', "Invoiced"),
         ('close', "Close"),
+        ('cancel', "Cancelado"),
     ], default='draft')
 
-
+    @api.multi
+    def button_cancel(self):
+        self.write({'state': 'cancel'})
+        self.active = False
+        return {}
 
     @api.one
     @api.depends("sale_order_id")
