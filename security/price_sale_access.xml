@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+  <record model="res.groups" id="price_sale_select">
+    <field name="name">Preciar Venta / Selector</field>
+  </record>
+</odoo>

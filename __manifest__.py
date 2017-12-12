@@ -19,6 +19,7 @@
 
     # always loaded
     'data': [
+        'security/price_sale_access.xml',
         'security/ir.model.access.csv',
         'pinup_price_sale.xml',
         'pinup_sale_order.xml',
